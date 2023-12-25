@@ -30,7 +30,7 @@ app.use('/api/v1/category', cors(corsOptions), cateogryRoutes);
 app.use('/api/v1/product', cors(corsOptions), productRoutes);
 
 // rest api
-app.use('*', cors(corsOptions), (req, res) => {
+app.use('/', cors(corsOptions), (req, res) => {
 	res.send('Server is live');
 });
 

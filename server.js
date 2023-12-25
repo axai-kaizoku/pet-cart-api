@@ -24,14 +24,17 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
+//cors
+app.options();
+
 //routes
-app.use('/api/v1/auth', cors(corsOptions), authRoutes);
-app.use('/api/v1/category', cors(corsOptions), cateogryRoutes);
-app.use('/api/v1/product', cors(corsOptions), productRoutes);
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/category', cateogryRoutes);
+app.use('/api/v1/product', productRoutes);
 
 // rest api
-app.use('/', cors(corsOptions), (req, res) => {
-	res.send('Server is live');
+app.use('*', function (req, res) {
+	res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
 app.listen(PORT, () => {

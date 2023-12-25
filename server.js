@@ -25,12 +25,12 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 //routes
-app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/category', cateogryRoutes);
-app.use('/api/v1/product', productRoutes);
+app.use('/api/v1/auth', cors(corsOptions), authRoutes);
+app.use('/api/v1/category', cors(corsOptions), cateogryRoutes);
+app.use('/api/v1/product', cors(corsOptions), productRoutes);
 
 // rest api
-app.use('/', (req, res) => {
+app.use('*', cors(corsOptions), (req, res) => {
 	res.send('Server is live');
 });
 

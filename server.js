@@ -30,9 +30,9 @@ app.use('/api/v1/category', cateogryRoutes);
 app.use('/api/v1/product', productRoutes);
 
 // rest api
-app.use('*', function (req, res) {
-	res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+// app.use('*', function (req, res) {
+// 	res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
 
 app.listen(PORT, () => {
 	console.log(`Server is running on http://localhost:${PORT}`);

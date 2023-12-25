@@ -30,7 +30,7 @@ app.use('/api/v1/category', cateogryRoutes);
 app.use('/api/v1/product', productRoutes);
 
 // rest api
-app.use('*', (req, res) => {
+app.use('/', (req, res) => {
 	res.send('Server is live');
 });
 

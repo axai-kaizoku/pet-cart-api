@@ -1,8 +1,14 @@
-// const allowedOrigins = require('./allowedOrigins');
+const allowedOrigins = require('./allowedOrigins');
 
 const corsOptions = {
-	origin: 'https://petcart-y1o1.onrender.com',
-	optionsSuccessStatus: 200,
+	origin: (origin, callback) => {
+		if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+			callback(null, true);
+		} else {
+			callback(new Error('Not allowed by CORS'));
+		}
+	},
+	credentials: true,
 };
 
 module.exports = corsOptions;

@@ -7,7 +7,7 @@ const cateogryRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
 const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
-const path = require('path');
+// const path = require('path');
 const httpProxy = require('http-proxy');
 
 //configure dotenv

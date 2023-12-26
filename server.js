@@ -8,6 +8,7 @@ const productRoutes = require('./routes/productRoutes');
 const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
 const path = require('path');
+const httpProxy = require('http-proxy');
 
 //configure dotenv
 dotenv.config();
@@ -17,12 +18,13 @@ connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 3050;
+const proxy = httpProxy.createProxyServer();
 
 // middlewares
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, './client/build')));
+// app.use(express.static(path.join(__dirname, './client/build')));
 
 //cors
 app.options();
@@ -33,10 +35,16 @@ app.use('/api/v1/category', cateogryRoutes);
 app.use('/api/v1/product', productRoutes);
 
 // rest api
-app.use('*', function (req, res) {
-	res.sendFile(path.join(__dirname, './client/build/index.html'));
+app.use('*', (req, res) => {
+	proxy.web(req, res, {
+		target: 'https://petcart-y1o1.onrender.com', // Replace with your client's port
+	});
 });
 
+// function (req, res) {
+// 	res.sendFile(path.join(__dirname, './client/build/index.html'));
+// }
+
 app.listen(PORT, () => {
-	console.log(`Server is running on http://localhost:${PORT}`);
+	console.log(`Server is running!!`);
 });

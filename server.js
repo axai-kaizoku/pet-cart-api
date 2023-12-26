@@ -36,9 +36,7 @@ app.use('/api/v1/product', productRoutes);
 
 // rest api
 app.use('*', (req, res) => {
-	proxy.web(req, res, {
-		target: 'https://petcart-y1o1.onrender.com', // Replace with your client's port
-	});
+	res.send("Hey I'm live");
 });
 
 // function (req, res) {
